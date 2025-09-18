@@ -89,7 +89,7 @@ defineExpose({ replay })
     <div class="relative z-10 h-full w-full flex flex-col items-center justify-center">
       <div class="text-center max-w-2xl px-6">
         <h1 class="text-4xl md:text-6xl font-extralight tracking-tight text-slate-800">
-          Seccion de Inventario de las 7 Areas
+          La sección de Inventario de las 7 Areas
         </h1>
         <p class="mt-4 text-slate-600">
           Siete disciplinas orbitando una visión. Hardware, software, redes, seguridad, IA, nube y diseño — en elegante armonía.
