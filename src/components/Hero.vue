@@ -41,7 +41,7 @@ const orbitStyle = computed(() => ({
   animationPlayState: paused.value ? 'paused' as const : 'running' as const,
 }))
 
-// Nueva función para desplazar la vista al centro de la sección
+
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
   if (element) {
@@ -56,6 +56,14 @@ const scrollToSection = (id: string) => {
     });
   }
 };
+
+const mobileGridClass = computed(() => {
+  const count = logos.length
+  if (count <= 2) {
+    return 'grid-cols-' + count
+  }
+  return 'grid-cols-3'
+})
 
 onMounted(() => {
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -88,15 +96,26 @@ defineExpose({ replay })
         </p>
       </div>
 
-      <div class="flex justify-center space-x-6 mt-10">
-        <div v-for="(logo, i) in logos" :key="i" class="p-2">
-          <a @click="scrollToSection(logo.id)" class="cursor-pointer">
-            <img 
-              :src="logo.url"
-              :alt="logo.name + ' logo'"
-              class="w-12 h-12 transition duration-300 ease-in-out filter brightness-50 hover:brightness-100"
-            />
-          </a>
+      <div class="mt-10">
+        <div class="grid" :class="[mobileGridClass, 'sm:grid-cols-4 md:grid-cols-7 gap-6 sm:gap-8 justify-items-center']">
+          <div 
+            v-for="(logo, i) in logos" 
+            :key="i" 
+            class="flex flex-col items-center justify-center text-center p-2 group"
+          >
+            <a @click="scrollToSection(logo.id)" class="cursor-pointer">
+              <img 
+                :src="logo.url"
+                :alt="logo.name + ' logo'"
+                class="w-12 h-12 transition duration-500 ease-in-out filter brightness-50 group-hover:brightness-100"
+              />
+            </a>
+            <span 
+              class="mt-2 text-xs font-medium text-slate-600 group-hover:text-slate-900 transition-colors duration-500"
+            >
+              {{ logo.name }}
+            </span>
+          </div>
         </div>
       </div>
     </div>

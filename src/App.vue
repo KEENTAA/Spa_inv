@@ -73,15 +73,18 @@ const areas = [
         </div>
       </section>
 
-      <section>
-        <AreaCard
-          v-for="(a, idx) in areas"
-          :key="a.id"
-          :id="a.id"
-          :title="a.title"
-          :description="a.description"
-          :align="idx % 2 === 0 ? 'left' : 'right'"
-        />
+      <section class="mb-20">
+        <div class="grid gap-8">
+          <AreaCard
+            v-for="(a, idx) in areas"
+            :key="a.id"
+            :id="a.id"
+            :title="a.title"
+            :description="a.description"
+            :align="idx % 2 === 0 ? 'left' : 'right'"
+            :is-mobile="true"
+          />
+        </div>
       </section>
 
       <footer class="py-16">

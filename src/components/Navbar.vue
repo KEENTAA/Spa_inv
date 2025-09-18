@@ -5,33 +5,33 @@ const open = ref(false)
 const scrolled = ref(false)
 
 const links = [
-  { id: 'hardware', label: 'Hardware' },
-  { id: 'software', label: 'Software' },
-  { id: 'networking', label: 'Networking' },
-  { id: 'cybersecurity', label: 'Cybersecurity' },
-  { id: 'ai-data', label: 'AI & Data' },
-  { id: 'cloud-systems', label: 'Cloud Systems' },
-  { id: 'design-ux', label: 'Design & UX' },
+  { id: 'hardware', label: 'Hardware', url: 'https://tu-sitio.com/hardware' },
+  { id: 'software', label: 'Software', url: 'https://tu-sitio.com/software' },
+  { id: 'networking', label: 'Networking', url: 'https://tu-sitio.com/networking' },
+  { id: 'cybersecurity', label: 'Cybersecurity', url: 'https://tu-sitio.com/cybersecurity' },
+  { id: 'ai-data', label: 'AI & Data', url: 'https://tu-sitio.com/ai-data' },
+  { id: 'cloud-systems', label: 'Cloud Systems', url: 'https://tu-sitio.com/cloud-systems' },
+  { id: 'design-ux', label: 'Design & UX', url: 'https://tu-sitio.com/design-ux' },
 ]
 
 const emit = defineEmits<{ (e: 'replay'): void }>()
 
 function onScroll() {
-  const threshold = window.innerHeight * 0.6
-  scrolled.value = window.scrollY > threshold
+  const threshold = window.innerHeight * 0.6
+  scrolled.value = window.scrollY > threshold
 }
 
 function goTop() {
-  emit('replay')
+  emit('replay')
 }
 
 function onNavClick() {
-  open.value = false
+  open.value = false
 }
 
 onMounted(() => {
-  onScroll()
-  window.addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
 })
 
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
@@ -63,7 +63,8 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
           <a
             v-for="l in links"
             :key="l.id"
-            :href="`#${l.id}`"
+            :href="l.url"
+            target="_blank"
             class="px-3 py-2 text-sm text-slate-700 hover:text-slate-900 relative"
           >
             <span class="after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:bg-slate-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"></span>
@@ -83,12 +84,16 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
         </button>
       </div>
 
-      <div v-if="open" class="md:hidden pb-3">
-        <div class="grid gap-1">
+      <div 
+        v-if="open" 
+        class="md:hidden pb-3 absolute w-full top-16 left-0 right-0 z-40 bg-white/70 backdrop-blur-md"
+      >
+        <div class="grid gap-1 px-4 sm:px-6 lg:px-8">
           <a
             v-for="l in links"
             :key="l.id + '-m'"
-            :href="`#${l.id}`"
+            :href="l.url"
+            target="_blank"
             @click="onNavClick"
             class="px-3 py-2 rounded-md text-slate-700 hover:bg-white/70"
           >
